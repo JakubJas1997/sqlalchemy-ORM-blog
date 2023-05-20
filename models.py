@@ -41,6 +41,8 @@ class Article(Base):
         nullable=False
     )
 
+    author = relationship("Author")
+
     def __repr__(self):
         return f"Article title: {self.title}"
 
