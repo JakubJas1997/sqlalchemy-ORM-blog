@@ -9,7 +9,7 @@ def main():
     #   print(article, author)
 
     # as we do now. we have to add relationship to class Article
-    article = session.query(Article).get(1)
+    article = session.query(Article).get(9)
     print(article, article.author)
 
 

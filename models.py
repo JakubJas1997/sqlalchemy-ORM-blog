@@ -19,7 +19,7 @@ class Author(Base):
     registration_date = Column(
         DateTime, default=datetime.datetime.now, nullable=False
     )
-    articles = relationship("Article")
+    articles = relationship("Article", cascade="all, delete, delete-orphan")
 
     def __repr__(self):
         return f"Author nickname: {self.user_name}"

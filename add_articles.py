@@ -3,7 +3,7 @@ from models import Author, Article
 from faker import Faker
 
 def main():
-    author = session.query(Author).get(2)
+    author = session.query(Author).get(13)
     fake = Faker()
     article = Article(
         title=fake.sentence(),
@@ -16,4 +16,6 @@ def main():
 
 
 if __name__ == '__main__':
+    main()
+    main()
     main()
