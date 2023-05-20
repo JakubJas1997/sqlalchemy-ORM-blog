@@ -1,6 +1,6 @@
 import datetime
 
-from sqlalchemy import Column, Integer, String, DateTime, Text, ForeignKey
+from sqlalchemy import Column, Integer, String, DateTime, Text, ForeignKey, Table
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
@@ -42,9 +42,29 @@ class Article(Base):
     )
 
     author = relationship("Author")
-
+    hashtags = relationship("Hashtag", secondary="article_hashtags")
     def __repr__(self):
         return f"Article title: {self.title}"
 
 
-Base.metadata.create_all()
+class Hashtag(Base):
+    __tablename__ = "hashtags"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(45), nullable=False, unique=True)
+
+    # relacja do articles i do articles_has
+
+    articles = relationship("Article", secondary="article_hashtags")
+    def __repr__(self):
+        return f"Hashtag: {self.name}"
+
+
+# pomocnicza tabela w relacji wiele do wielu
+article_hashtags = Table(
+    "article_hashtags",
+    Base.metadata,
+    Column("id_article", Integer, ForeignKey("articles.id"), primary_key=True),
+    Column("id_hashtag", Integer, ForeignKey("hashtags.id"), primary_key=True)
+)
+
+
