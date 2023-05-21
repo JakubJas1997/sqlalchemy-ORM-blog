@@ -2,7 +2,7 @@ from session import session
 from models import Article, Hashtag
 
 def main():
-    hashtag = session.query(Hashtag).get(6)
+    hashtag = session.query(Hashtag).get(1)
     print(f"Article with #{hashtag.name}")
     for article in hashtag.articles:
         print(article.title)
